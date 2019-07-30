@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bfI-sI-tbQ">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="3f4-na-BKQ">
+            <objects>
+                <viewController id="sEa-DN-gjg" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0Qm-si-8xd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="h9Z-VI-HJf"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="dNn-ov-WjM"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9SL-rv-dGg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1127.2" y="-498.80059970014997"/>
+        </scene>
+        <!--首页-->
+        <scene sceneID="dZH-ly-fAX">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bfI-sI-tbQ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="首页" image="btn_home_normal" selectedImage="barrage_trumpet_icon" id="b8A-w0-Zxo"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tKu-vU-BqV">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="sEa-DN-gjg" kind="relationship" relationship="rootViewController" id="Uwx-Am-nzf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kvn-oU-HNf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="188" y="-498.80059970014997"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="barrage_trumpet_icon" width="14" height="14"/>
+        <image name="btn_home_normal" width="24" height="24"/>
+    </resources>
+</document>
