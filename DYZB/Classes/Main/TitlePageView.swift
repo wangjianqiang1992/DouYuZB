@@ -8,10 +8,29 @@
 
 import UIKit
 
+protocol TitlePageViewDelegate : class {
+    
+    func titlePageView(titleView : TitlePageView, selectedIndex index : Int)
+    
+}
+
+
+
+
+
 private var scrolllineH : CGFloat = 2
+
+
+
+
 
 class TitlePageView: UIView {
 
+    private var currentIndex : Int = 0
+    //声明delegate属性
+    
+    weak var delegate : TitlePageViewDelegate?
+    
     
     //定义属性
     private var titles : [String] = []
@@ -123,6 +142,13 @@ extension TitlePageView{
             scrollView.addSubview(lable)
             
             lables.append(lable)
+            
+            
+            lable.isUserInteractionEnabled = true
+            
+            let tapGes = UITapGestureRecognizer(target: self, action:#selector(self.lableClick(tapGas:)))
+            
+            lable.addGestureRecognizer(tapGes)
         }
         
         
@@ -156,3 +182,40 @@ extension TitlePageView{
     
     
 }
+
+
+extension TitlePageView{
+    
+    
+    @objc private func lableClick(tapGas : UITapGestureRecognizer){
+        
+        
+        guard let currentLable = tapGas.view as? UILabel else {
+            return
+        }
+        
+        
+       let oldLable = lables[currentIndex]
+        
+ 
+        currentLable.textColor = UIColor.orange
+        
+        oldLable.textColor = UIColor.lightGray
+        
+        currentIndex = currentLable.tag
+        
+        UIView.animate(withDuration: 0.3) {
+            self.scrolLine.frame.origin.x = currentLable.frame.minX;
+        }
+        
+       
+       
+        
+        
+        delegate?.titlePageView(titleView: self, selectedIndex: currentIndex)
+        
+        
+    }
+    
+}
+

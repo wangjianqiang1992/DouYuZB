@@ -15,17 +15,17 @@ class PageContentView: UIView {
     
     private var childVcs : [UIViewController] = []
     
-    private var superViewController : UIViewController = UIViewController()
+    private weak var superViewController : UIViewController?
     
     
-//  懒加载 UICollectionView
+//  懒加载 UICollectionVie
     
-    private lazy var conllectionView : UICollectionView = {
+    private lazy var conllectionView : UICollectionView = {[weak self] in
         //创建layout
         
         let layout = UICollectionViewFlowLayout()
         
-        layout.itemSize = self.bounds.size
+        layout.itemSize = (self?.bounds.size)!
         
         layout.minimumLineSpacing = 0
         
@@ -44,13 +44,15 @@ class PageContentView: UIView {
         
         conllectionView.bounces = false
         
+        collectionView.delegate = self
+        
         conllectionView.dataSource = self
         
-       // conllectionView.register(UICollectionView.self, forCellWithReuseIdentifier: cellID)
         
-        conllectionView.register(UICollectionView.self, forCellWithReuseIdentifier: cellViewID)
+        
+        
+        conllectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellViewID")
         return conllectionView
-        
         
         
     }()
@@ -63,7 +65,7 @@ class PageContentView: UIView {
         super.init(frame: frame)
     }
     
-    convenience  init(frame: CGRect,childVcs: [UIViewController],superViewController: UIViewController) {
+    convenience  init(frame: CGRect,childVcs: [UIViewController],superViewController: UIViewController?) {
         
         self.init(frame: frame)
         
@@ -88,7 +90,7 @@ extension PageContentView{
         
         for childVC in childVcs {
             
-            superViewController.addChild(childVC)
+            superViewController?.addChild(childVC)
             
         }
         
@@ -107,10 +109,15 @@ extension PageContentView : UICollectionViewDataSource{
         return childVcs.count
     }
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = conllectionView.dequeueReusableCell(withReuseIdentifier: cellViewID, for: indexPath)
+        let cell = conllectionView.dequeueReusableCell(withReuseIdentifier: "cellViewID", for: indexPath)
        
         
         //cell 设置内容
@@ -122,9 +129,6 @@ extension PageContentView : UICollectionViewDataSource{
             
         }
         
-        
-        
-        
         let childVC = childVcs[indexPath.item]
         childVC.view.frame = cell.contentView.bounds
         
@@ -134,5 +138,40 @@ extension PageContentView : UICollectionViewDataSource{
         return cell
     }
     
+//
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        print("------")
+//    }
+//
+}
+
+
+
+extension PageContentView : UICollectionViewDelegate{
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        print("------")
+        
+    }
+
+}
+
+
+
+
+
+extension PageContentView{
+    
+    
+    func jupmIndexPageView(currentIndex : Int){
+        
+        
+        let offSet = CGFloat(currentIndex) * ScreenWidth
+        
+        conllectionView.setContentOffset(CGPoint(x: offSet, y: 0), animated: false)
+        
+    }
     
 }

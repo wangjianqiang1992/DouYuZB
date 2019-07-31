@@ -23,6 +23,8 @@ class HomeViewController: UIViewController {
         
         let titleView = TitlePageView(frame: frame, titles: titles)
         
+         titleView.delegate = self
+        
         //titleView.backgroundColor = UIColor.red
         
         return titleView
@@ -30,7 +32,7 @@ class HomeViewController: UIViewController {
     }()
     
     
-    private lazy var pageContentView : PageContentView = {
+    private lazy var pageContentView : PageContentView = {[weak self] in
         
         let pageX : CGFloat = 0
         let pageY : CGFloat = titlePageView.frame.maxY
@@ -135,4 +137,21 @@ extension HomeViewController {
         
     }
   
+}
+
+
+extension HomeViewController : TitlePageViewDelegate{
+    
+    
+    @objc func titlePageView(titleView: TitlePageView, selectedIndex index: Int) {
+        
+        print("我点了第\(index+1)个Lable")
+       
+        
+        pageContentView.jupmIndexPageView(currentIndex: index)
+        
+        
+    }
+    
+    
 }
