@@ -27,6 +27,12 @@ class HomeViewController: UIViewController {
         
         //titleView.backgroundColor = UIColor.red
         
+        
+       
+        
+        print("layer.cornerRadius   layer.masksToBounds")
+        
+        
         return titleView
         
     }()
@@ -40,9 +46,13 @@ class HomeViewController: UIViewController {
         let pageH : CGFloat = ScreenHeight - kNavigationBar - kStatusBarH - kTabbarH - titlePageView.frame.size.height
         
        
+        
+        
         var childVcs = [UIViewController]()
         
-        for _ in 0..<4{
+        childVcs.append(RecommendVCViewController())
+        
+        for _ in 0..<3{
             
             let childVC = UIViewController()
             
